@@ -62,7 +62,7 @@ def load_data(input_path):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser( description='Script to divide the dataset into Train/Test subsets (70%/30%) and imputation of missing values.')
+    parser = argparse.ArgumentParser( description='Script to train and evaluate different AF classification models based on 12-lead ECGs: XGBoost, FCN, FCN+MLP(age,sex), Encoder, Encoder+MLP(age,sex), FCN+Encoder, FCN+Encoder+MLP(age,sex) or LSTM.')
     parser.add_argument("input_path", help="Path directory with input data (12-lead ECGs and diagnostics).")
     parser.add_argument("-c", "--classifier",
                         help="Classifier to use: XGBoost [XGB], FCN [FCN], FCN+MLP(age,sex) [FCN_MLP], Encoder [ENC], Encoder+MLP(age,sex) [ENC_MLP], FCN+Encoder [FCN_ENC], FCN+Encoder+MLP(age,sex) [FCN_ENC_MLP] or LSTM [LSTM]. Default option: [FCN_MLP].",
@@ -71,7 +71,7 @@ if __name__ == '__main__':
                         help="Features to use when XGBoost classifiers is selected: age and sex [AS], root mean squared of 12 leads [RMS], different model for each of 12 leads [Leads], root mean squared of 12 leads + age and sex [RMS_AS] or different model for each of 12 leads + ages and sex [Leads_AS]. This option is only used when XGBoost classifier is selected. Default: [Leads].",
                         default='Leads')
     parser.add_argument("-o", "--output_dir",
-                        help="Path to directory for the created Train/Test sets. Default option: current directory.",
+                        help="Path to the output directory for creating model and evaluation files. Default option: current directory.",
                         default=os.getcwd())
     args = vars(parser.parse_args())
     input_path = args['input_path']

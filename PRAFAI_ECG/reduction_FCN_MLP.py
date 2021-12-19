@@ -414,13 +414,13 @@ def train_eval(X_train, demo_train, y_train, X_dev, demo_dev, y_dev, X_test, dem
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser( description='Script to divide the dataset into Train/Test subsets (70%/30%) and imputation of missing values.')
+    parser = argparse.ArgumentParser( description='Script in which the AF classification model development experiment is performed by reducing the number of training ECGs. FCN+MLP(age,sex) classification algorithm is used.')
     parser.add_argument("input_path", help="Path directory with input data (12-lead ECGs and diagnostics).")
     parser.add_argument("-r", "--reduction",
                         help="Reduction to apply to datasets. If float (fraction), the data set will be reduced by that fraction for each iteration until it does not exceed 50 items. If list of integers, the number of items indicated will be selected for each iteration. Default: 0.5",
                         default=0.5)
     parser.add_argument("-o", "--output_dir",
-                        help="Path to directory for the created Train/Test sets. Default option: current directory.",
+                        help="Path to the output directory with results of the reduction experiment. Default option: current directory.",
                         default=os.getcwd())
     args = vars(parser.parse_args())
     input_path = args['input_path']
