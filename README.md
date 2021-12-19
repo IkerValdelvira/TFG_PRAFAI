@@ -1,6 +1,8 @@
 # TFG-PRAFAI
 
+Software developed to carry out the End-of-Degree Project ***PRAFAI (Prediction of Recurrence of Atrial Fibrillation using Artificial Intelligence)***. Here you will find all the scripts developed during this research work with the following objectives: the creation of the dataset joining the necessary information of each patient with a first atrial fibrillation episode beetwen 2015 and 2018 in the OSI Bilbao-Basurto, and Artificial Intelligence and Machine Learning tasks for developing the predictive tool of AF recurrence like data pre-processing, choice of supervised learning algorithms, implementation and generation of predictive models, results evaluation and most important predictive variables analysis.
 
+The software used in the secondary objective to develop a predictive model of AF recurrence based on 12-lead ECGs is also available. More specifically, there is the software used in experiments to classify ECGs with AF or normal sinus rhythm on the [*Chapman University and Shaoxing People’s Hospital*](https://www.nature.com/articles/s41597-020-0386-x) database.
 
 ## Prerequisites:
 
@@ -22,6 +24,52 @@ It is recommended to use the application in an environment with **Python 3.8** a
 
 To install the necessary packages with the corresponding versions automatically, execute the following command:
 
-  ```
-  pip install -r requirements.txt
-  ```
+```
+$ pip install -r requirements.txt
+```
+
+## Software description and usage:
+
+There is a help option that shows the usage of each script in the application, e.g. in *dataset_creation.py* script:
+
+```
+$ python PRAFAI/dataset_creation.py -h
+```
+  
+### PRAFAI package scripts:
+
+* ***dataset_creation.py***: Script to create the PRAFAI dataset. Input folder with following files is needed.
+
+* ***dataset_analysis.py***: Script to get distribution histograms of each feature with in regard to the class.
+
+* ***split_mvimputation.py***: Script to divide the dataset into Train/Test subsets (80%/20%) and imputation of missing values. Only labeled items will be taken. Different techniques are available for the imputation of missing values: arithmetic mean, median, prediction by linear regression or different value.
+
+* ***standardization_normalization.py***: Script to standardize/normalize numerical features of the training set (Train) and apply the same rescaling to the testing set (Test). Different techniques are available for standardization/normalization: StandardScaler, MinMaxScaler, MaxAbsScaler, QuantileTransformer or Normalizer.
+
+* ***preprocessing.py***: Script to divide the dataset into Train/Test subsets (80%/20%), imputate missing values and standardize/normalize numerical features of the training set (Train), and apply the same imputation and rescaling to the testing set (Test). Only labeled items will be taken. Different techniques are available for the imputation of missing values: arithmetic mean, median, prediction by linear regression or different value. Different techniques are available for standardization/normalization: StandardScaler, MinMaxScaler, MaxAbsScaler, QuantileTransformer or Normalizer.
+
+* ***feature_selection.py***: Script to perform feature selection or dimensionality reduction on training set and apply it to the test set. Different techniques are available for feature selection: RFE, Lasso_SelectFromModel, Trees_SelectFromModel, SFS and SelectKBest. The available technique for dimensionality reduction is PCA.
+
+* ***feature_importance.py***: Script to get feature importance of training set. Different techniques and classifiers are available for getting feature importance: LogisticRegression, CART, RandomForest, XGBoost, Permutation_RandomForest and Permutation_KNN. Heatmaps of feature correlation matrices are also available.
+
+* ***classifiers.py***: Script to train a model and evaluate it on validation and test sets. Different machine learning algorithms are available for model training: DecisionTree, LogisticRegression, KNN, NaiveBayes, Perceptron, MultilayerPerceptron, SVM, RandomForest, XGBoost, LightGBM, Bagging and AdaBoost.
+
+* ***best_model.py***: Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before.
+
+### PRAFAI_ECG package scripts:
+
+* ***train_models.py***: Script to train and evaluate different AF classification models based on 12-lead ECGs: XGBoost, FCN, FCN+MLP(age,sex), Encoder, Encoder+MLP(age,sex), FCN+Encoder, FCN+Encoder+MLP(age,sex) or LSTM.
+
+* ***train_FCN_MLP_CV.py***: Script to train FCN+MLP(age,sex) AF classification model based on 12-lead ECGs and evaluate via 10-fold Cross Validation.
+
+* ***reductionFCN_MLP.py***: Script in which the AF classification model development experiment is performed by reducing the number of training ECGs. FCN+MLP(age,sex) classification algorithm is used.
+
+
+## Project documentation:
+
+The documentation describing the work in this project can be found here:
+
+
+## Author and contact:
+
+Iker Valdelvira ([ivaldelvira001@ikasle.ehu.eus](mailto:ivaldelvira001@ikasle.ehu.eus))
