@@ -58,6 +58,8 @@ $ python PRAFAI/dataset_creation.py -h
 
 ### PRAFAI_ECG package scripts:
 
+* ***musexmlex.py***: Script to extract an 12-lead ECG rhythm strip from a MUSE(R) XML file. It converts MUSE-XML files to CSV files. Credits to [***PROJECT: musexmlexport***](https://github.com/rickead/musexmlexport).
+
 * ***train_models.py***: Script to train and evaluate different AF classification models based on 12-lead ECGs: XGBoost, FCN, FCN+MLP(age,sex), Encoder, Encoder+MLP(age,sex), FCN+Encoder, FCN+Encoder+MLP(age,sex) or LSTM.
 
 * ***train_FCN_MLP_CV.py***: Script to train FCN+MLP(age,sex) AF classification model based on 12-lead ECGs and evaluate via 10-fold Cross Validation.
