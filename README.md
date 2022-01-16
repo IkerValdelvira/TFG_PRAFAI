@@ -90,6 +90,8 @@ A folder called ***FinalModel*** will be created, among others, which contains t
 
 **3. MAKE PREDICTIONS ON NEW ITEMS**
 
+![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/new_items_example.png?raw=true)
+
 ```
 $ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
 ```
