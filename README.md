@@ -99,6 +99,16 @@ A folder called ***FinalModel*** will be created, among others, which contains t
 
 **3. MAKE PREDICTIONS ON NEW ITEMS**
 
+To make a prediction on a new item, the PRAFAI model needs the values of the following 30 features:
+
+* Numeric features:<br />**'potasio'**, **'no_hdl'**, **'colesterol'**, **'ntprobnp'**, **'vsg'**, **'fevi'**, **'diametro_ai'**, **'area_ai'**, **'numero_dias_desde_ingreso_hasta_evento'**, **'numero_dias_ingresado'** and **'edad'**.
+
+* Binary features:<br />**'ablacion'**, **'ansiedad'**, **'demencia'**, **'sahos'**, **'hipertiroidismo'**, **'cardiopatia_isquemica'**, **'valvula_mitral_reumaticas'**, **'genero'**, **'pensionista'**, **'residenciado'**, **'n05a'**, **'n05b'**, **'c01'**, **'c01b'**, **'c02'**, **'c04'**, **'c09'**, **'c10'** and **'polimedicacion'**.
+
+\* In **'genero'** (genre) feature **female** is set as **0** and **male** is set as **1**.
+
+The new items to be predicted must be introduced in a **CSV file** delimited by semicolon (**;**). A template and example of this CSV file is available at: [a link](https://github.com/user/repo/blob/branch/other_file.md)
+
 ![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/new_items_example.png?raw=true)
 
 ```
