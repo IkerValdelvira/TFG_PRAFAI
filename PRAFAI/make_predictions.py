@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     # Read dataset, model and necessary files
     print('\nReading CSV file which contains new items to predict from: ' + str(new_items_path))
-    new_items = pd.read_csv(new_items_path, index_col=0, delimiter=";")
+    new_items = pd.read_csv(new_items_path, index_col=0)
     print('Reading PRAFAI predictive model from: ' + str(os.path.join(model_folder, "SVM_FINAL_MODEL.joblib")))
     model = joblib.load(os.path.join(model_folder, "SVM_FINAL_MODEL.joblib"))
     print('Reading missing values imputation file from: ' + str(os.path.join(model_folder, "med_imputation_dict.json")))

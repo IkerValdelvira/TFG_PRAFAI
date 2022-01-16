@@ -1,2 +1,2 @@
-index;potasio;no_hdl;colesterol;ntprobnp;vsg;fevi;diametro_ai;area_ai;numero_dias_desde_ingreso_hasta_evento;numero_dias_ingresado;edad;ablacion;ansiedad;demencia;sahos;hipertiroidismo;cardiopatia_isquemica;valvula_mitral_reumaticas;genero;pensionista;residenciado;n05a;n05b;c01;c01b;c02;c04;c09;c10;polimedicacion
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+index,potasio,no_hdl,colesterol,ntprobnp,vsg,fevi,diametro_ai,area_ai,numero_dias_desde_ingreso_hasta_evento,numero_dias_ingresado,edad,ablacion,ansiedad,demencia,sahos,hipertiroidismo,cardiopatia_isquemica,valvula_mitral_reumaticas,genero,pensionista,residenciado,n05a,n05b,c01,c01b,c02,c04,c09,c10,polimedicacion
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
