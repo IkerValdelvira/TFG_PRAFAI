@@ -95,6 +95,8 @@ $ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o 
 ```
 A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items.
 
+![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/predictions_example.png?raw=true)
+
 
 ## Project documentation:
 
