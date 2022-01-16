@@ -1,14 +1,10 @@
+import json
 import warnings
-
 import joblib
-
-warnings.simplefilter(action='ignore', category=FutureWarning)
-
 from pathlib import Path
 import argparse
 import os
 import pandas as pd
-pd.options.mode.chained_assignment = None  # default='warn'
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sn
@@ -19,6 +15,9 @@ from sklearn.model_selection import train_test_split, cross_val_predict, Stratif
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from tabulate import tabulate
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
+pd.options.mode.chained_assignment = None  # default='warn'
 
 
 def class_and_split(dataset):
@@ -55,9 +54,12 @@ def impute_median_85_mv(train, test, dataset_train):
                 del train_copy[column]
                 print("\tFeature '" + str(column) + "' was deleted because at least 85% of items contain missing values.")
                 deleted_dict.add(column)
-            elif (train_copy[column].dtype == np.float64):  # Se imputa la media de la columna si es una variable numérica
+            elif (train_copy[column].dtype == np.float64):  # Se imputa la mediana de la columna si es una variable numérica
                 column_median = round(dataset_train[column].median(), 3)
                 train_copy[column] = train_copy[column].fillna(column_median)
+                median_dict[column] = column_median
+            elif (column in ["edad", "genero"]):    # Se guarda la mediana de la edad y el género para posibles imputaciones de nuevos items en un futuro
+                column_median = dataset_train[column].median()
                 median_dict[column] = column_median
     train_copy['imc'] = train_copy['imc'].round()
 
@@ -67,6 +69,10 @@ def impute_median_85_mv(train, test, dataset_train):
     for column in median_dict:
         test_copy[column] = test_copy[column].fillna(median_dict[column])
     test_copy['imc'] = test_copy['imc'].round()
+
+    # Guardar diccionario de imputaciones
+    with open(os.path.join(output_dir, "FinalModel", "med_imputation_dict.json"), 'w') as file:
+        json.dump(median_dict, file)
 
     return train_copy, test_copy
 
@@ -94,11 +100,14 @@ def standardization(train, test):
     train['sigue_fa'] = y_train
     test['sigue_fa'] = y_test
 
+    # Guardar StandardScaler
+    joblib.dump(ct, os.path.join(output_dir, "FinalModel", 'std_scaler.bin'), compress=True)
+
     return train, test
 
 
 def rfe(train_dev, test, file_name):
-    file = open(os.path.join(output_dir, 'REPORT_RFE_' + file_name + '.txt'),"w")
+    file = open(os.path.join(output_dir, "Preprocess", 'REPORT_RFE_' + file_name + '.txt'),"w")
     file.write("Dataset: " + file_name + "\n")
 
     # Borrar variables con varianza = 0
@@ -142,7 +151,7 @@ def rfe(train_dev, test, file_name):
     plt.xlabel("Number of features selected")
     plt.ylabel("Cross validation score (AUC)")
     plt.plot(range(min_features_to_select, len(rfecv.grid_scores_) + min_features_to_select), rfecv.grid_scores_)
-    plt.savefig(os.path.join(output_dir, 'RFE_' + file_name + '.png'))
+    plt.savefig(os.path.join(output_dir, "Preprocess", 'RFE_' + file_name + '.png'))
     plt.close()
 
     # Borrar variables del Test
@@ -152,10 +161,8 @@ def rfe(train_dev, test, file_name):
     return train_dev, test
 
 
-def svm_model(train, test, file_name):
-    Path(os.path.join(output_dir, "Model")).mkdir(parents=True, exist_ok=True)
-
-    file = open(os.path.join(output_dir, "Model", 'REPORT_SVM.txt'), "w")
+def svm_model_evaluation(train, test, file_name):
+    file = open(os.path.join(output_dir, "ModelEvaluation", 'REPORT_SVM.txt'), "w")
     file.write("Dataset: " + file_name + "\n")
 
     # Model Training --> SVM
@@ -177,8 +184,8 @@ def svm_model(train, test, file_name):
     y_pred_test = svm.predict(X_test)
 
     # Save the model
-    joblib.dump(svm, os.path.join(output_dir, "Model", "SVM_MODEL.joblib"), compress=3)
-    print('Trained model saved in: ' + os.path.join(output_dir, "Model", "SVM_MODEL.joblib", 'wb'))
+    joblib.dump(svm, os.path.join(output_dir, "ModelEvaluation", "SVM_MODEL.joblib"), compress=3)
+    print('Trained model saved in: ' + os.path.join(output_dir, "ModelEvaluation", "SVM_MODEL.joblib"))
 
     print('Evaluating model...')
 
@@ -215,10 +222,10 @@ def svm_model(train, test, file_name):
     ax2.set(xlabel="Predicted label", ylabel="True label")
     plt.suptitle("Confusion matrix")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "Model", "ConfusionMatrix_" + file_name + ".png"))
+    plt.savefig(os.path.join(output_dir, "ModelEvaluation", "ConfusionMatrix_" + file_name + ".png"))
     # plt.figure(figsize=(6, 10))
     plt.close()
-    print('Confusion matrixes saved in: ' + os.path.join(output_dir, "Model", "ConfusionMatrix.png"))
+    print('Confusion matrixes saved in: ' + os.path.join(output_dir, "ModelEvaluation", "ConfusionMatrix.png"))
 
     #ROC curve (Train/Dev)
     cv = StratifiedKFold(n_splits=10)
@@ -246,8 +253,8 @@ def svm_model(train, test, file_name):
     ax.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2, label=r'$\pm$ 1 std. dev.')
     ax.set(xlim=[-0.05, 1.05], ylim=[-0.05, 1.05], title="ROC curve (Train/Dev), " + file_name)
     ax.legend(loc="lower right")
-    plt.savefig(os.path.join(output_dir, "Model", "ROCcurve(Train_Dev).png"))
-    print('Validation ROC curve and AUC saved in: ' + os.path.join(output_dir, "Model", "ROCcurve(Train_Dev).png"))
+    plt.savefig(os.path.join(output_dir, "ModelEvaluation", "ROCcurve(Train_Dev).png"))
+    print('Validation ROC curve and AUC saved in: ' + os.path.join(output_dir, "ModelEvaluation", "ROCcurve(Train_Dev).png"))
     plt.close()
 
     # ROC curve and AUC (Test)
@@ -269,8 +276,8 @@ def svm_model(train, test, file_name):
     # y label
     plt.ylabel('True Positive rate')
     plt.legend(loc='best')
-    plt.savefig(os.path.join(output_dir, "Model", "ROCcurve(Test).png"))
-    print('Test ROC curve and AUC saved in: ' + os.path.join(output_dir, "Model", "ROCcurve(Test).png"))
+    plt.savefig(os.path.join(output_dir, "ModelEvaluation", "ROCcurve(Test).png"))
+    print('Test ROC curve and AUC saved in: ' + os.path.join(output_dir, "ModelEvaluation", "ROCcurve(Test).png"))
     plt.close()
 
     # Test predictions probabilities
@@ -298,58 +305,80 @@ def svm_model(train, test, file_name):
     file.write("\n\nPredictions on Test set:\n")
     file.write(tabulate(results))
 
-    print('Model evaluation report saved in: ' + os.path.join(output_dir, "Model", "REPORT_SVM_" + file_name + ".txt"))
+    print('Model evaluation report saved in: ' + os.path.join(output_dir, "ModelEvaluation", "REPORT_SVM_" + file_name + ".txt"))
+
+
+def final_svm_model(dataset):
+    # Model Training --> SVM
+    y = dataset["sigue_fa"]
+    X = dataset.drop("sigue_fa", 1)
+
+    # Model
+    svm = SVC(probability=True, C=1, gamma=0.1, kernel='poly', degree=2)
+    svm.fit(X, y)
+
+    # Save the model
+    joblib.dump(svm, os.path.join(output_dir, "FinalModel", "SVM_FINAL_MODEL.joblib"), compress=3)
+    print('Trained final model saved in: ' + os.path.join(output_dir, "FinalModel", "SVM_FINAL_MODEL.joblib"))
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before.')
+    parser = argparse.ArgumentParser(description='Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.')
     parser.add_argument("input_dataset", help="Path to PRAFAI dataset.")
-    parser.add_argument("-o", "--output_dir", help="Path to the output directory for creating following files: middle-procces training and test sets, feature selection report, predictive model and evaluation report.", default=os.getcwd())
+    parser.add_argument("-o", "--output_dir", help="Path to the output directory for creating following files: middle-procces training and test sets, feature selection report, predictive model and evaluation report, and final model for new predictions.", default=os.getcwd())
     args = vars(parser.parse_args())
     input_dataset = args['input_dataset']
     output_dir = args['output_dir']
 
+    Path(os.path.join(output_dir, "Preprocess")).mkdir(parents=True, exist_ok=True)
+    Path(os.path.join(output_dir, "ModelEvaluation")).mkdir(parents=True, exist_ok=True)
+    Path(os.path.join(output_dir, "FinalModel")).mkdir(parents=True, exist_ok=True)
+
     # Read dataset
-    print('Reading PRAFAI dataset from: ' + str(input_dataset))
+    print('\nReading PRAFAI dataset from: ' + str(input_dataset))
     dataset = pd.read_csv(input_dataset, delimiter=";")
 
     # Train/Test split
     print('\nCreating Train/Test subsets...')
     train, test, dataset_train = class_and_split(dataset)
-    print('Saving ' + str(os.path.join(output_dir, "train.csv ...")))
-    train.to_csv(os.path.join(output_dir, "train.csv"), index=False, sep=';')
-    print('Saving ' + str(os.path.join(output_dir, "test.csv ...")))
-    test.to_csv(os.path.join(output_dir, "test.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "train.csv ...")))
+    train.to_csv(os.path.join(output_dir, "Preprocess", "train.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "test.csv ...")))
+    test.to_csv(os.path.join(output_dir, "Preprocess", "test.csv"), index=False, sep=';')
 
     # Missing values imputation by median
     print("\nImputing median to missing values in 'train' and 'test' sets...")
     train_median, test_median = impute_median_85_mv(train, test, dataset_train)
-    print('Saving ' + str(os.path.join(output_dir, "train_med.csv ...")))
-    train_median.to_csv(os.path.join(output_dir, "train_med.csv"), index=False, sep=';')
-    print('Saving ' + str(os.path.join(output_dir, "test_med.csv ...")))
-    test_median.to_csv(os.path.join(output_dir, "test_med.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "train_med.csv ...")))
+    train_median.to_csv(os.path.join(output_dir, "Preprocess", "train_med.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "test_med.csv ...")))
+    test_median.to_csv(os.path.join(output_dir, "Preprocess", "test_med.csv"), index=False, sep=';')
 
     # Standardization by StandardScaler
     print("\nPreprocessing 'train_med' and 'test_med' sets with StandardScaler...")
     train_StandardScaler, test_StandardScaler = standardization(train_median, test_median)
-    print('Saving ' + str(os.path.join(output_dir, "train_med_StandardScaler.csv")))
-    train_StandardScaler.to_csv(os.path.join(output_dir, "train_med_StandardScaler.csv"), index=False, sep=';')
-    print('Saving ' + str(os.path.join(output_dir, "test_med_StandardScaler.csv")))
-    test_StandardScaler.to_csv(os.path.join(output_dir, "test_med_StandardScaler.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "train_med_StandardScaler.csv")))
+    train_StandardScaler.to_csv(os.path.join(output_dir, "Preprocess", "train_med_StandardScaler.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "test_med_StandardScaler.csv")))
+    test_StandardScaler.to_csv(os.path.join(output_dir, "Preprocess", "test_med_StandardScaler.csv"), index=False, sep=';')
 
     # Feature selection by RFE
     print("\nPerforming RFE feature selection on 'train_med_StandardScaler' and 'test_med_StandardScaler' sets...")
     print('Saving RFE feature selection report...')
     train_RFE, test_RFE = rfe(train_StandardScaler, test_StandardScaler, 'train_med_StandardScaler')
-    print('Saving ' + str(os.path.join(output_dir, 'train_med_StandardScaler_RFE.csv')))
-    train_RFE.to_csv(os.path.join(output_dir, "train_med_StandardScaler_RFE.csv"), index=False, sep=';')
-    print('Saving ' + str(os.path.join(output_dir, "test_med_StandardScaler_RFE.csv")))
-    test_RFE.to_csv(os.path.join(output_dir, "test_med_StandardScaler_RFE.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", 'train_med_StandardScaler_RFE.csv')))
+    train_RFE.to_csv(os.path.join(output_dir, "Preprocess", "train_med_StandardScaler_RFE.csv"), index=False, sep=';')
+    print('Saving ' + str(os.path.join(output_dir, "Preprocess", "test_med_StandardScaler_RFE.csv")))
+    test_RFE.to_csv(os.path.join(output_dir, "Preprocess", "test_med_StandardScaler_RFE.csv"), index=False, sep=';')
 
+    # Model Evaluation
     print("\nTraining SVM model with 'train_med_StandardScaler_RFE'...")
-    svm_model(train_RFE, test_RFE, 'train_med_StandardScaler_RFE')
+    svm_model_evaluation(train_RFE, test_RFE, 'train_med_StandardScaler_RFE')
 
-
+    # Final Model (Train + Test)
+    print("\nTraining and saving SVM final model (TRAIN + TEST)...")
+    dataset = pd.concat([train_RFE, test_RFE])
+    final_svm_model(dataset)
 
 
 
