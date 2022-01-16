@@ -70,6 +70,33 @@ $ python PRAFAI/dataset_creation.py -h
 * ***reductionFCN_MLP.py***: Script in which the AF classification model development experiment is performed by reducing the number of training ECGs. FCN+MLP(age,sex) classification algorithm is used.
 
 
+## TUTORIAL: Getting PRAFAI predictive model and making predictions on new items:
+
+This section explains how to obtain the final predictive model and make predictions on new data.
+
+**1. CREATE PRAFAI DATASET**
+
+```
+$ python PRAFAI/dataset_creation.py INPUT_DIR -o OUTPUT_DIR
+```
+
+**2. TRAIN AND GET PRAFAI PREDICTIVE MODEL**
+
+```
+$ python PRAFAI/best_model.py PATH_TO/dataset.csv -o OUTPUT_DIR
+```
+A folder called ***FinalModel*** will be created, among others, which contains the model and necessary files to make new predictions.
+
+
+**3. MAKE PREDICTIONS ON NEW ITEMS**
+
+```
+$ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
+
+```
+A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items.
+
+
 ## Project documentation:
 
 The documentation describing the work in this project can be found here:
