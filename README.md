@@ -4,6 +4,15 @@ Software developed to carry out the End-of-Degree Project ***PRAFAI (Prediction 
 
 The software used in the secondary objective to develop a predictive model of AF recurrence using 12-lead ECGs is also available. More specifically, there is the software used in experiments to classify ECGs with AF or normal sinus rhythm on the [*ECG recording from Chapman University and Shaoxing People’s Hospital*](https://www.nature.com/articles/s41597-020-0386-x) database.
 
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Software description and usage](#software-description-and-usage)
+<br />2.1. [PRAFAI package scripts](#prafai-package-scripts)
+<br />2.2. [PRAFAI_ECG package scripts](#prafai_ecg-package-scripts)
+3. [TUTORIAL: Getting PRAFAI predictive model and making predictions on new items](#tutorial-getting-prafai-predictive-model-and-making-predictions-on-new-items)
+4. [Project documentation](#project-documentation)
+5. [Author and contact](#author-and-contact)
+
 ## Prerequisites:
 
 It is recommended to use the application in an environment with **Python 3.8** and the installation of the following packages is required:
@@ -89,6 +98,18 @@ A folder called ***FinalModel*** will be created, among others, which contains t
 
 
 **3. MAKE PREDICTIONS ON NEW ITEMS**
+
+To make a prediction on a new item, the PRAFAI model needs the values of the following 30 features:
+
+* Numeric features:<br />**'potasio'**, **'no_hdl'**, **'colesterol'**, **'ntprobnp'**, **'vsg'**, **'fevi'**, **'diametro_ai'**, **'area_ai'**, **'numero_dias_desde_ingreso_hasta_evento'**, **'numero_dias_ingresado'** and **'edad'**.
+
+* Binary features:<br />**'ablacion'**, **'ansiedad'**, **'demencia'**, **'sahos'**, **'hipertiroidismo'**, **'cardiopatia_isquemica'**, **'valvula_mitral_reumaticas'**, **'genero'**, **'pensionista'**, **'residenciado'**, **'n05a'**, **'n05b'**, **'c01'**, **'c01b'**, **'c02'**, **'c04'**, **'c09'**, **'c10'** and **'polimedicacion'**.
+
+\* In **'genero'** (genre) feature **female** is set as **0** and **male** is set as **1**.
+
+The new items to be predicted must be introduced in a **CSV file** delimited by semicolon (**;**). A template and example of this CSV file is available at: [a link](https://github.com/user/repo/blob/branch/other_file.md)
+
+![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/new_items_example.png?raw=true)
 
 ```
 $ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
