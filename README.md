@@ -107,7 +107,7 @@ To make a prediction on a new item, the PRAFAI model needs the values of the fol
 
 \* In **'genero'** (genre) feature **female** is set as **0** and **male** is set as **1**.
 
-The new items to be predicted must be introduced in a **CSV file** delimited by semicolon (**;**). A template and example of this CSV file is available at: [new_items_template.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_template.csv) and [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv).
+The new items to be predicted must be introduced in a **CSV file** delimited by comma (**,**). The first column must be the index (ID) of the new item. A template and example of this CSV file is available at: [new_items_template.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_template.csv) and [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv).
 
 Following image shows the structure of a CSV file with the new items to be predicted ([new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv)):
 
