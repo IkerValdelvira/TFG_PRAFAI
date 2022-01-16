@@ -7,11 +7,11 @@ The software used in the secondary objective to develop a predictive model of AF
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
 2. [Software description and usage](#software-description-and-usage)
-3. [PRAFAI package scripts](#prafai-package-scripts)
-4. [PRAFAI_ECG package scripts](#prafai_ecg-package-scripts)
-5. [TUTORIAL: Getting PRAFAI predictive model and making predictions on new items](#tutotial:-getting-prafai-predictive-model-and-making-predictions-on-new-items)
-6. [Project documentation](#project-documentation)
-7. [Author and contact](#author-and-contact)
+<br />2.1. [PRAFAI package scripts](#prafai-package-scripts)
+<br />2.2. [PRAFAI_ECG package scripts](#prafai_ecg-package-scripts)
+3. [TUTORIAL: Getting PRAFAI predictive model and making predictions on new items](#tutorial-getting-prafai-predictive-model-and-making-predictions-on-new-items)
+4. [Project documentation](#project-documentation)
+5. [Author and contact](#author-and-contact)
 
 ## Prerequisites:
 
