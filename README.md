@@ -92,7 +92,6 @@ A folder called ***FinalModel*** will be created, among others, which contains t
 
 ```
 $ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
-
 ```
 A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items.
 
