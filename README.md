@@ -2,7 +2,7 @@
 
 Software developed to carry out the End-of-Degree Project ***PRAFAI (Prediction of Recurrence of Atrial Fibrillation using Artificial Intelligence)***. Here you will find all the scripts developed during this research work with the following objectives: the creation of the dataset joining the necessary information of each patient with a first atrial fibrillation episode beetwen 2015 and 2018 in the OSI Bilbao-Basurto, and Artificial Intelligence and Machine Learning tasks for developing the predictive tool of AF recurrence like data pre-processing, choice of supervised learning algorithms, implementation and generation of predictive models, results evaluation and most important predictive variables analysis.
 
-The software used in the secondary objective to develop a predictive model of AF recurrence based on 12-lead ECGs is also available. More specifically, there is the software used in experiments to classify ECGs with AF or normal sinus rhythm on the [*Chapman University and Shaoxing People’s Hospital*](https://www.nature.com/articles/s41597-020-0386-x) database.
+The software used in the secondary objective to develop a predictive model of AF recurrence using 12-lead ECGs is also available. More specifically, there is the software used in experiments to classify ECGs with AF or normal sinus rhythm on the [*ECG recording from Chapman University and Shaoxing People’s Hospital*](https://www.nature.com/articles/s41597-020-0386-x) database.
 
 ## Prerequisites:
 
@@ -54,9 +54,11 @@ $ python PRAFAI/dataset_creation.py -h
 
 * ***classifiers.py***: Script to train a model and evaluate it on validation and test sets. Different machine learning algorithms are available for model training: DecisionTree, LogisticRegression, KNN, NaiveBayes, Perceptron, MultilayerPerceptron, SVM, RandomForest, XGBoost, LightGBM, Bagging and AdaBoost.
 
-* ***best_model.py***: Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset. Following preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before.
+* ***best_model.py***: Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset. Following preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.
 
 ### PRAFAI_ECG package scripts:
+
+* ***musexmlex.py***: Script to extract an 12-lead ECG rhythm strip from a MUSE(R) XML file. It converts MUSE-XML files to CSV files. Credits to [***PROJECT: musexmlexport***](https://github.com/rickead/musexmlexport).
 
 * ***train_models.py***: Script to train and evaluate different AF classification models based on 12-lead ECGs: XGBoost, FCN, FCN+MLP(age,sex), Encoder, Encoder+MLP(age,sex), FCN+Encoder, FCN+Encoder+MLP(age,sex) or LSTM.
 
