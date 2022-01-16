@@ -106,17 +106,20 @@ To make a prediction on a new item, the PRAFAI model needs the values of the fol
 * Binary features:<br />**'ablacion'**, **'ansiedad'**, **'demencia'**, **'sahos'**, **'hipertiroidismo'**, **'cardiopatia_isquemica'**, **'valvula_mitral_reumaticas'**, **'genero'**, **'pensionista'**, **'residenciado'**, **'n05a'**, **'n05b'**, **'c01'**, **'c01b'**, **'c02'**, **'c04'**, **'c09'**, **'c10'** and **'polimedicacion'**.
 
 \* In **'genero'** (genre) feature **female** is set as **0** and **male** is set as **1**.
+<br />\* The new items that are introduced can have missing values in any of the features. These missing values will be automatically handled to make the predictions, but the fewer missing values there are, the more reliable the predictions will be.
 
-The new items to be predicted must be introduced in a **CSV file** delimited by comma (**,**). The first column must be the index (ID) of the new item. A template and example of this CSV file is available at: [new_items_template.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_template.csv) and [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv).
+The new items to be predicted must be introduced in a **CSV file** delimited by comma (**,**). The first column (index) must be the ID of the new item. A template and example of this CSV file is available at: [new_items_template.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_template.csv) and [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv).
 
 Following image shows the structure of a CSV file with the new items to be predicted ([new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv)):
 
 ![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/new_items_example.png?raw=true)
 
+To make the predictions, the following script must be executed:
 ```
-$ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
+$ python PRAFAI/make_predictions.py PATH_TO/new_items_example.csv PATH_TO/FinalModel -o OUTPUT_DIR
 ```
-A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items.
+
+A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items. In this file appears the ID (index) of each new item introduced together with the outcome of the model (prediction) and its probability. Following image shows the output *PREDICTIONS.txt* file after having introduced [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv):
 
 ![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/predictions_example.png?raw=true)
 
