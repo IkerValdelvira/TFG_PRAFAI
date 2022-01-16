@@ -56,6 +56,9 @@ $ python PRAFAI/dataset_creation.py -h
 
 * ***best_model.py***: Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset. Following preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.
 
+* ***make_predictions.py***: Script to make predictions on new input items using PRAFAI predictive model.
+
+
 ### PRAFAI_ECG package scripts:
 
 * ***musexmlex.py***: Script to extract an 12-lead ECG rhythm strip from a MUSE(R) XML file. It converts MUSE-XML files to CSV files. Credits to [***PROJECT: musexmlexport***](https://github.com/rickead/musexmlexport).
@@ -65,6 +68,32 @@ $ python PRAFAI/dataset_creation.py -h
 * ***train_FCN_MLP_CV.py***: Script to train FCN+MLP(age,sex) AF classification model based on 12-lead ECGs and evaluate via 10-fold Cross Validation.
 
 * ***reductionFCN_MLP.py***: Script in which the AF classification model development experiment is performed by reducing the number of training ECGs. FCN+MLP(age,sex) classification algorithm is used.
+
+
+## TUTORIAL: Getting PRAFAI predictive model and making predictions on new items:
+
+This section explains how to obtain the final predictive model and make predictions on new data.
+
+**1. CREATE PRAFAI DATASET**
+
+```
+$ python PRAFAI/dataset_creation.py INPUT_DIR -o OUTPUT_DIR
+```
+
+**2. TRAIN AND GET PRAFAI PREDICTIVE MODEL**
+
+```
+$ python PRAFAI/best_model.py PATH_TO/dataset.csv -o OUTPUT_DIR
+```
+A folder called ***FinalModel*** will be created, among others, which contains the model and necessary files to make new predictions.
+
+
+**3. MAKE PREDICTIONS ON NEW ITEMS**
+
+```
+$ python PRAFAI/make_predictions.py PATH_TO/new_items.csv PATH_TO/FinalModel -o OUTPUT_DIR
+```
+A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items.
 
 
 ## Project documentation:
