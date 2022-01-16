@@ -56,6 +56,9 @@ $ python PRAFAI/dataset_creation.py -h
 
 * ***best_model.py***: Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset. Following preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.
 
+* ***make_predictions.py***: Script to make predictions on new input items using PRAFAI predictive model.
+
+
 ### PRAFAI_ECG package scripts:
 
 * ***musexmlex.py***: Script to extract an 12-lead ECG rhythm strip from a MUSE(R) XML file. It converts MUSE-XML files to CSV files. Credits to [***PROJECT: musexmlexport***](https://github.com/rickead/musexmlexport).
