@@ -176,6 +176,7 @@ def svm_model_evaluation(train, test, file_name):
     y_test = test["sigue_fa"]
     X_train = train.drop("sigue_fa", 1)
     X_test = test.drop("sigue_fa", 1)
+    feature_names = X_train.columns.tolist()
 
     # Model and predictions
     svm = SVC(probability=True, C=1, gamma=0.1, kernel='poly', degree=2)
@@ -307,6 +308,40 @@ def svm_model_evaluation(train, test, file_name):
 
     print('Model evaluation report saved in: ' + os.path.join(output_dir, "ModelEvaluation", "REPORT_SVM_" + file_name + ".txt"))
 
+    # Feature importances using SVM with linear kernel
+    print('Getting model feature importance when trained using a SVM with linear kernel...')
+    svm_linear = SVC(probability=True, C=1, gamma=0.1, kernel='linear', degree=2)
+    svm_linear.fit(X_train, y_train)
+    coef = svm_linear.coef_.ravel()
+    coefficients = np.argsort(coef)
+    # create plot
+    plt.figure(figsize=(15, 10))
+    colors = ['red' if c < 0 else 'blue' for c in coef[coefficients]]
+    plt.bar(np.arange(len(coefficients)), coef[coefficients], color=colors)
+    feature_names = np.array(feature_names)
+    plt.xticks(np.arange(len(coefficients)), feature_names[coefficients], rotation=60, ha='right')
+    labels = ['no AF recurrence', 'AF recurrence']
+    colors = {'no AF recurrence': 'red', 'AF recurrence': 'blue'}
+    handles = [plt.Rectangle((0, 0), 1, 1, color=colors[label]) for label in labels]
+    plt.legend(handles, labels)
+    plt.title('Feature importances on linear SVM')
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "ModelEvaluation", "FeatureImportances_linearSVM.png"))
+    print('Feature importances on linear SVM saved in: ' + os.path.join(output_dir, "ModelEvaluation", "FeatureImportances_linearSVM.png"))
+    plt.close()
+
+    # Feature absolute importances using SVM with linear kernel
+    imp = abs(coef)
+    imp, names = zip(*sorted(zip(imp, feature_names)))
+    plt.figure(figsize=(10, 7))
+    plt.barh(range(len(names)), imp, align='center')
+    plt.yticks(range(len(names)), names)
+    plt.title('Feature absolute importances on linear SVM')
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "ModelEvaluation", "FeatureAbsoluteImportances_linearSVM.png"))
+    print('Feature absolute importances on linear SVM saved in: ' + os.path.join(output_dir, "ModelEvaluation", "FeatureAbsoluteImportances_linearSVM.png"))
+    plt.close()
+
 
 def final_svm_model(dataset):
     # Model Training --> SVM
@@ -323,7 +358,7 @@ def final_svm_model(dataset):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.')
+    parser = argparse.ArgumentParser(description='Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median in numeric features, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.')
     parser.add_argument("input_dataset", help="Path to PRAFAI dataset.")
     parser.add_argument("-o", "--output_dir", help="Path to the output directory for creating following files: middle-procces training and test sets, feature selection report, predictive model and evaluation report, and final model for new predictions.", default=os.getcwd())
     args = vars(parser.parse_args())

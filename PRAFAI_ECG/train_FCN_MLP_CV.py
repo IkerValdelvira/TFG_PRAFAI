@@ -356,7 +356,7 @@ def train_eval(features, demo, labels, output_dir):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser( description='Script to train FCN+MLP(age,sex) AF classification model based on 12-lead ECGs and evaluate via 10-fold Cross Validation.')
+    parser = argparse.ArgumentParser( description='Script to train FCN+MLP(age,sex) AF classification model based on 12-lead ECGs and evaluate it via 10-fold Cross Validation.')
     parser.add_argument("input_path", help="Path directory with input data (12-lead ECGs and diagnostics).")
     parser.add_argument("-o", "--output_dir",
                         help="Path to the output directory for creating model and evaluation files. Default option: current directory.",

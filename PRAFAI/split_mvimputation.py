@@ -206,7 +206,7 @@ def not_impute(train, test):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Script to divide the dataset into Train/Test subsets (80%/20%) and imputation of missing values. Only labeled items will be taken. Different techniques are available for the imputation of missing values: arithmetic mean, median, prediction by linear regression or different value.')
+    parser = argparse.ArgumentParser(description='Script to divide the dataset into Train/Test subsets (80%/20%) and imputation of missing values in numeric features. Only labeled items will be taken. Different techniques are available for the imputation of missing values: arithmetic mean, median, prediction by linear regression or different value.')
     parser.add_argument("input_dataset", help="Path to PRAFAI dataset.")
     parser.add_argument("-mv", "--mv_techniques", nargs='+', help="Missing values imputation techniques to use: arithmetic mean [mean], median [med], prediction [pred] and/or different value [diff]. Multiple options are accepted. The [all] option will apply all techniques. Default option: missing values are preserved.", default=[])
     parser.add_argument("-o", "--output_dir", help="Path to directory for the created Train/Test sets. Default option: current directory.", default=os.getcwd())

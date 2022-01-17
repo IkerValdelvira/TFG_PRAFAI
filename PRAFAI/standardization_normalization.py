@@ -54,7 +54,7 @@ def preprocess(train, test, type):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Script to standardize/normalize numerical features of the training set (Train) and apply the same rescaling to the testing set (Test). Different techniques are available for standardization/normalization: StandardScaler, MinMaxScaler, MaxAbsScaler, QuantileTransformer or Normalizer.')
+    parser = argparse.ArgumentParser(description='Script to standardize/normalize numeric features of the training set (Train) and apply the same rescaling to the testing set (Test). Different techniques are available for standardization/normalization: StandardScaler, MinMaxScaler, MaxAbsScaler, QuantileTransformer or Normalizer.')
     parser.add_argument("input_train", help="Path to training set (Train).")
     parser.add_argument("input_test", help="Path to testing set (Test).")
     parser.add_argument("-std", "--std_techniques", nargs='+', help="Standardization/Normalization techniques to use: StandardScaler [SS], MinMaxScaler [MMS], MaxAbsScaler [MAS], QuantileTransformer [QT] and/or Normalizer [N]. Multiple options are accepted. The [all] option will apply all techniques. Default option: StandardScaler [SS].", default=['SS'])
