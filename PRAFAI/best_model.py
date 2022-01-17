@@ -360,7 +360,7 @@ def final_svm_model(dataset):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Script to achieve the optimal AF recurrence predictive model on PRAFAI dataset.\nFollowing preprocessing techniques are appied to training set: elimination of features with at least 85% of missing values, imputation of missing values by median in numeric features, standardization of numeric features by StandardScaler and feature selection by RFE method. The predictive model is trained using SVM algorithm with a second-degree polynomial kernel. Finally, model evaluation is carried out on validation and test sets, as well as predictions made by the model on test items never seen before. A final model merging Train and Test sets is trained and saved for new predictions.')
     parser.add_argument("input_dataset", help="Path to PRAFAI dataset.")
-    parser.add_argument("-o", "--output_dir", help="Path to the output directory for creating following files: middle-procces training and test sets, feature selection report, predictive model and evaluation report, and final model for new predictions.", default=os.getcwd())
+    parser.add_argument("-o", "--output_dir", help="Path to the output directory for creating following files: middle-procces training and test sets, feature selection report, predictive model, evaluation report and feature importances, and final model for new predictions.", default=os.getcwd())
     args = vars(parser.parse_args())
     input_dataset = args['input_dataset']
     output_dir = args['output_dir']
