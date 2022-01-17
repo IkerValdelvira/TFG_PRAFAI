@@ -1529,7 +1529,7 @@ def cargar_clase(primeros_outcome, tabla_prafai):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script to create the PRAFAI dataset. Input folder with following files is needed: DatosDePaciente.xlsx, Diagnosticos.xlsx, EPOCgrupo1.xlsx, EPOCgrupo2.xlsx, HTF_1_1.xlsx, HFT_1_2.xlsx, HTF_1_3.xlsx, HTF_2_1.xlsx, HTF_2_2.xlsx, HTF_2_3.xlsx, Laboratorio.xlsx, LaboratorioGrupo1.xlsx, LaboratorioGrupo2.xlsx, NumeroIngresos.xlsx, Outcomes.xlsx, ProcedimientosQuirurgicos.xlsx, Pruebas.xlsx, TallaPesoIMC.xlsx, UltimoIngreso.xlsx.')
-    parser.add_argument("-i", "--input_dir", help="Path to directory with input data. Default option: current directory.", default=os.getcwd())
+    parser.add_argument("input_dir", help="Path to directory with input data.")
     parser.add_argument("-o", "--output_dir", help="Path to directory for the created dataset. Default option: current directory.", default=os.getcwd())
     args = vars(parser.parse_args())
     input_dir = args['input_dir']
