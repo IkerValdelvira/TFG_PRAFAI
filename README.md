@@ -126,9 +126,7 @@ A file called ***PREDICTIONS.txt*** will be created, which contains the predicti
 
 ## Project documentation:
 
-The documentation describing the work in this project can be found here: [TFG_PRAFAI_Memoria_IkerValdelvira.pdf](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/documentation/TFG_PRAFAI_Memoria_IkerValdelvira.pdf)
-
-<a id="raw-url" href="https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/documentation/TFG_PRAFAI_Memoria_IkerValdelvira.pdf" download="https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/documentation/TFG_PRAFAI_Memoria_IkerValdelvira.pdf">Download FILE</a>
+The documentation describing the work in this project can be found and downloaded here: [TFG_PRAFAI_Memoria_IkerValdelvira.pdf](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/documentation/TFG_PRAFAI_Memoria_IkerValdelvira.pdf)
 
 
 ## Author and contact:
