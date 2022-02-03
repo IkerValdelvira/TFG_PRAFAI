@@ -17,10 +17,10 @@ output_dir = ""
 
 def histogram_class(dataset, feature_name):
     labels = ['no AF recurrence', 'AF recurrence']
-    classes = pd.value_counts(dataset[feature_name], sort=False)
+    classes = pd.value_counts(dataset[feature_name], sort=False, normalize=True)*100
     barlist = plt.bar(classes.index, classes.values, alpha=0.5)
     for i, j in enumerate(classes):
-        plt.text(i, 10, classes[i], ha='center', fontsize=15)
+        plt.text(i, 2, str(round(classes[i],2)) + "%", ha='center', fontsize=15)
         if (i == 0):
             barlist[i].set_color('g')
         else:
@@ -28,9 +28,10 @@ def histogram_class(dataset, feature_name):
     plt.title("AF recurrence class distribution")
     plt.xticks(range(2), labels)
     plt.xlabel("AF recurrence")
-    plt.ylabel("Frequency")
-    plt.savefig(os.path.join(output_dir, "DistribucionClase_" + feature_name + ".png"))
-    print("\nHistogram of class distribution '" + feature_name + "' saved in: " + os.path.join(output_dir, "DistribucionClase_" + feature_name + ".png"))
+    plt.ylabel("Frequency (%)")
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "ClassDistribution_" + feature_name + ".png"))
+    print("\nHistogram of class distribution '" + feature_name + "' saved in: " + os.path.join(output_dir, "ClassDistribution_" + feature_name + ".png"))
     plt.close()
 
 
@@ -41,8 +42,9 @@ def histogram_binary_categorical(dataset, feature_name):
     plt.xlabel(feature_name)
     plt.legend()
     plt.title('Histogram of feature: ' + feature_name)
-    plt.savefig(os.path.join(output_dir, "Distribucion_" + feature_name + ".png"))
-    print("\nHistogram of feature '" + feature_name + "' saved in: " + os.path.join(output_dir, "Distribucion_" + feature_name + ".png"))
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "Distribution_" + feature_name + ".png"))
+    print("\nHistogram of feature '" + feature_name + "' saved in: " + os.path.join(output_dir, "Distribution_" + feature_name + ".png"))
     plt.close()
 
 
@@ -52,8 +54,9 @@ def histogram_numeric(dataset, feature_name):
     plt.xlabel(feature_name)
     plt.legend()
     plt.title('Histogram of feature: ' + feature_name)
-    plt.savefig(os.path.join(output_dir, "Distribucion_" + feature_name + ".png"))
-    print("\nHistogram of feature '" + feature_name + "' saved in: " + os.path.join(output_dir, "Distribucion_" + feature_name + ".png"))
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "Distribution_" + feature_name + ".png"))
+    print("\nHistogram of feature '" + feature_name + "' saved in: " + os.path.join(output_dir, "Distribution_" + feature_name + ".png"))
     plt.close()
 
 
