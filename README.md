@@ -112,7 +112,7 @@ The new items to be predicted must be introduced in a **CSV file** delimited by 
 
 Following image shows the structure of a CSV file with some new items to be predicted ([new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv)):
 
-![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/new_items_example.png?raw=true)
+![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/example_images/new_items_example.png?raw=true)
 
 To make the predictions, the following script must be executed:
 ```
@@ -121,7 +121,7 @@ $ python PRAFAI/make_predictions.py PATH_TO/new_items_example.csv PATH_TO/FinalM
 
 A file called ***PREDICTIONS.txt*** will be created, which contains the predictions made by the model on new input items. In this file appears the ID (index) of each new item introduced together with the outcome of the model (prediction) and its probability. Following image shows the output *PREDICTIONS.txt* file after having introduced [new_items_example.csv](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/templates/new_items_example.csv):
 
-![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/images/predictions_example.png?raw=true)
+![alt text](https://github.com/IkerValdelvira/TFG_PRAFAI/blob/master/example_images/predictions_example.png?raw=true)
 
 
 ## Project documentation:
