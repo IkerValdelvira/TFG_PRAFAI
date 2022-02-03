@@ -1,0 +1,16 @@
+Dataset: train_med_StandardScaler
+
+Deleted features with variance to zero: 26
+['etilogia_cardiologica', 'sindrome_metabolico', 'hipercolesterolemia', 'drogodependencia', 'menopausia', 'miocardiopatia', 'posoperatoria', 'alcohol', 'contracciones_prematuras_ectopia_extrasistolica', 'bradicardia', 'insuficiencia_renal', 'flutter', 'fumador', 'otras_valvulopatias', 'valvulopatia_mitral_congenita', 'diabetes_tipo2', 'hipertension_arterial', 'insuficiencia_cardiaca', 'fibrilacion_palpitacion', 'ictus', 'sinusal_coronaria', 'bloqueos_rama', 'arteriopatia_periferica', 'diabetes_tipo1', 'otras_arritmias_psicogena_ritmo_bigeminal', 'dislipidemia']
+
+Number of current features: 63
+Number of selected features: 30
+Number of deleted features: 33
+
+Features selected by RFE:
+['potasio' 'no_hdl' 'colesterol' 'ntprobnp' 'vsg' 'fevi' 'diametro_ai'
+ 'area_ai' 'numero_dias_desde_ingreso_hasta_evento'
+ 'numero_dias_ingresado' 'edad' 'ablacion' 'ansiedad' 'demencia' 'sahos'
+ 'hipertiroidismo' 'cardiopatia_isquemica' 'valvula_mitral_reumaticas'
+ 'genero' 'pensionista' 'residenciado' 'n05a' 'n05b' 'c01' 'c01b' 'c02'
+ 'c04' 'c09' 'c10' 'polimedicacion']

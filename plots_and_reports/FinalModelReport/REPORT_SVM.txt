@@ -1,0 +1,146 @@
+Dataset: train_med_StandardScaler_RFE
+
+Algorithm: SVM
+Hyperparameters:
+	C: 1
+	gamma: 0.1
+	kernel: 'poly'
+	degree: 2
+
+
+Classification Report (Train/Dev):
+              precision    recall  f1-score   support
+
+         0.0       0.68      0.54      0.60       170
+         1.0       0.72      0.83      0.77       248
+
+    accuracy                           0.71       418
+   macro avg       0.70      0.68      0.69       418
+weighted avg       0.71      0.71      0.70       418
+
+specificity		0.54
+sensitivity		0.83
+
+
+Classification Report (Test):
+              precision    recall  f1-score   support
+
+         0.0       0.65      0.56      0.60        43
+         1.0       0.72      0.79      0.75        62
+
+    accuracy                           0.70       105
+   macro avg       0.68      0.67      0.68       105
+weighted avg       0.69      0.70      0.69       105
+
+specificity		0.56
+sensitivity		0.79
+
+
+Predictions on Test set:
+--------------  ----------------------------  --------------------------------  -------------------  ------------
+Instance: 779   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 90.8%   Success: YES
+Instance: 1066  Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 75.99%  Success: YES
+Instance: 497   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 61.56%  Success: YES
+Instance: 880   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 97.38%  Success: NO
+Instance: 89    Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 76.07%  Success: YES
+Instance: 111   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 64.32%  Success: YES
+Instance: 582   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 62.92%  Success: YES
+Instance: 503   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 52.47%  Success: YES
+Instance: 569   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 78.71%  Success: YES
+Instance: 380   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 62.91%  Success: YES
+Instance: 475   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 78.34%  Success: YES
+Instance: 431   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 60.46%  Success: YES
+Instance: 1863  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 70.29%  Success: YES
+Instance: 767   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 81.56%  Success: YES
+Instance: 1180  Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 53.08%  Success: YES
+Instance: 508   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 52.28%  Success: YES
+Instance: 509   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 51.51%  Success: YES
+Instance: 1079  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 93.49%  Success: YES
+Instance: 729   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 53.51%  Success: YES
+Instance: 520   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 68.42%  Success: YES
+Instance: 579   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 54.5%   Success: YES
+Instance: 596   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 57.1%   Success: NO
+Instance: 1152  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 60.67%  Success: YES
+Instance: 563   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 53.09%  Success: YES
+Instance: 1850  Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 67.91%  Success: YES
+Instance: 347   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 66.37%  Success: YES
+Instance: 1858  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 81.48%  Success: YES
+Instance: 1     Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 55.08%  Success: YES
+Instance: 352   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 89.05%  Success: YES
+Instance: 1175  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 62.65%  Success: NO
+Instance: 1047  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 94.61%  Success: YES
+Instance: 432   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 74.35%  Success: YES
+Instance: 594   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 84.17%  Success: YES
+Instance: 909   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 72.63%  Success: YES
+Instance: 484   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 55.23%  Success: YES
+Instance: 279   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 76.13%  Success: NO
+Instance: 617   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 60.19%  Success: YES
+Instance: 248   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 84.85%  Success: YES
+Instance: 631   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 92.06%  Success: YES
+Instance: 1865  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 75.84%  Success: YES
+Instance: 517   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 68.59%  Success: YES
+Instance: 1105  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 86.88%  Success: YES
+Instance: 993   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 53.04%  Success: YES
+Instance: 565   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 59.27%  Success: YES
+Instance: 900   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 67.66%  Success: YES
+Instance: 1049  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 50.0%   Success: YES
+Instance: 737   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 73.65%  Success: YES
+Instance: 634   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 51.73%  Success: YES
+Instance: 610   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 66.03%  Success: YES
+Instance: 777   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 91.51%  Success: YES
+Instance: 735   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 62.08%  Success: NO
+Instance: 887   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 74.89%  Success: YES
+Instance: 775   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 69.39%  Success: YES
+Instance: 870   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 92.44%  Success: YES
+Instance: 589   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 95.8%   Success: YES
+Instance: 606   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 58.47%  Success: YES
+Instance: 465   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 51.22%  Success: YES
+Instance: 1073  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 91.37%  Success: YES
+Instance: 1089  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 69.43%  Success: YES
+Instance: 689   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 61.49%  Success: NO
+Instance: 551   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 66.67%  Success: NO
+Instance: 1885  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 75.84%  Success: NO
+Instance: 447   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 51.56%  Success: YES
+Instance: 586   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 54.52%  Success: YES
+Instance: 15    Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 71.5%   Success: NO
+Instance: 94    Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 78.03%  Success: NO
+Instance: 1052  Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 69.34%  Success: YES
+Instance: 934   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 88.63%  Success: YES
+Instance: 524   Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 73.04%  Success: YES
+Instance: 1840  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 91.03%  Success: YES
+Instance: 304   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 74.63%  Success: YES
+Instance: 61    Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 70.81%  Success: YES
+Instance: 324   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 64.44%  Success: NO
+Instance: 793   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 71.58%  Success: NO
+Instance: 1058  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 78.28%  Success: YES
+Instance: 434   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 85.16%  Success: YES
+Instance: 1838  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 76.73%  Success: NO
+Instance: 1845  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 73.57%  Success: YES
+Instance: 1879  Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 64.79%  Success: YES
+Instance: 834   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 74.57%  Success: YES
+Instance: 369   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 77.14%  Success: YES
+Instance: 440   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 79.09%  Success: YES
+Instance: 1059  Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 77.74%  Success: YES
+Instance: 1842  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 73.39%  Success: YES
+Instance: 988   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 52.66%  Success: NO
+Instance: 1116  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 58.1%   Success: NO
+Instance: 423   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 81.6%   Success: NO
+Instance: 798   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 54.27%  Success: YES
+Instance: 504   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 87.75%  Success: YES
+Instance: 1064  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 57.63%  Success: YES
+Instance: 1852  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 54.49%  Success: NO
+Instance: 418   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 70.42%  Success: YES
+Instance: 382   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 62.33%  Success: YES
+Instance: 773   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 65.55%  Success: YES
+Instance: 519   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 83.43%  Success: YES
+Instance: 1106  Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 65.71%  Success: NO
+Instance: 25    Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 88.3%   Success: YES
+Instance: 781   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 71.71%  Success: YES
+Instance: 109   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 82.59%  Success: YES
+Instance: 398   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 66.82%  Success: YES
+Instance: 460   Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 75.13%  Success: YES
+Instance: 1828  Class: 1.0(AF recurrence)     Predicted: 1.0(AF recurrence)     Probability: 70.86%  Success: YES
+Instance: 1848  Class: 1.0(AF recurrence)     Predicted: 0.0(no AF recurrence)  Probability: 55.83%  Success: YES
+Instance: 873   Class: 0.0(no AF recurrence)  Predicted: 1.0(AF recurrence)     Probability: 62.85%  Success: NO
+Instance: 331   Class: 0.0(no AF recurrence)  Predicted: 0.0(no AF recurrence)  Probability: 80.96%  Success: YES
+--------------  ----------------------------  --------------------------------  -------------------  ------------
